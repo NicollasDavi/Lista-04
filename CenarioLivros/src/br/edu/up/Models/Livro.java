@@ -1,4 +1,4 @@
-package br.edu.up.Models;
+package br.edu.up.models;
 
 public class Livro {
     private String codigo;
@@ -53,6 +53,16 @@ public class Livro {
 
     public void setAno(int ano) {
         this.ano = ano;
+    }
+
+    public String toString() {
+        return "Livro {" +
+                "\n  Código: " + codigo +
+                "\n  Título: " + titulo +
+                "\n  Autores: " + autores +
+                "\n  ISBN: " + isbn +
+                "\n  Ano: " + ano +
+                "\n}";
     }
 
 }
