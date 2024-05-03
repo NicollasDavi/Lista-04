@@ -6,7 +6,7 @@ public class Dia {
 
     public Dia(int diaMes){
         this.diaMes = diaMes;
-        this.compromissos = new Compromisso[24]; // Assumindo compromissos em intervalos de hora
+        this.compromissos = new Compromisso[24];
     }
 
     public void adicionarCompromisso(Compromisso comp){
