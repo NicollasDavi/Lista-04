@@ -11,6 +11,16 @@ public class Disciplina {
     private List<Aluno> alunosMatriculados;
     private List<SituacaoAluno> situacoes;
 
+    
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public Disciplina(String nome, String identificador, String curriculo) {
         this.nome = nome;
         this.identificador = identificador;
