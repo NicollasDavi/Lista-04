@@ -1,71 +1,141 @@
-package view;
+package View;
 
+import java.time.LocalDate;
 import java.util.Scanner;
-import br.edu.up.Models.Seguro;
-import br.edu.up.Models.SeguroVeiculo;
-import br.edu.up.Models.SeguroVida;
+import Controller.*;
+import Model.*;
+
 
 public class SeguroView {
+    private SeguroController controller;
     private Scanner scanner;
 
-    public SeguroView() {
-        scanner = new Scanner(System.in);
+    public SeguroView(SeguroController controller) {
+        this.controller = controller;
+        this.scanner = new Scanner(System.in);
     }
 
-    public int exibirMenu() {
-        System.out.println("\nMenu:");
-        System.out.println("1. Incluir seguro");
-        System.out.println("2. Localizar seguro");
-        System.out.println("3. Excluir seguro");
-        System.out.println("4. Excluir todos os seguros");
-        System.out.println("5. Listar todos os seguros");
-        System.out.println("6. Ver quantidade de seguros");
-        System.out.println("7. Sair");
-        System.out.print("Escolha uma opção: ");
-        return scanner.nextInt();
+    public void exibirMenu() {
+        int opcao;
+        do {
+            System.out.println("1. Incluir seguro");
+            System.out.println("2. Localizar seguro");
+            System.out.println("3. Excluir seguro");
+            System.out.println("4. Excluir todos os seguros");
+            System.out.println("5. Listar todos os seguros");
+            System.out.println("6. Ver quantidade de seguros");
+            System.out.println("7. Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine(); // Consome a nova linha
+
+            switch (opcao) {
+                case 1:
+                    incluirSeguro();
+                    break;
+                case 2:
+                    localizarSeguro();
+                    break;
+                case 3:
+                    excluirSeguro();
+                    break;
+                case 4:
+                    excluirTodosSeguros();
+                    break;
+                case 5:
+                    listarTodosSeguros();
+                    break;
+                case 6:
+                    verQuantidadeSeguros();
+                    break;
+                case 7:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+            }
+        } while (opcao != 7);
     }
 
-    public Seguro criarSeguro() {
-        System.out.print("Digite o tipo de seguro (1 - Vida, 2 - Veículo): ");
-        int tipo = scanner.nextInt();
-        System.out.print("Digite o número da apólice: ");
-        String numeroApolice = scanner.next();
-        System.out.print("Digite o titular: ");
-        String titular = scanner.next();
-        System.out.print("Digite o valor segurado: ");
-        double valorSegurado = scanner.nextDouble();
+    private void incluirSeguro() {
+        System.out.print("Informe o tipo de seguro (vida/veiculo): ");
+        String tipo = scanner.nextLine();
 
-        if (tipo == 1) {
-            System.out.print("Digite a idade do segurado: ");
-            int idadeSegurado = scanner.nextInt();
-            return new SeguroVida(numeroApolice, titular, valorSegurado, idadeSegurado);
+        System.out.print("Informe o número da apólice: ");
+        String apolice = scanner.nextLine();
+
+        System.out.print("Informe o nome do segurado: ");
+        String nome = scanner.nextLine();
+        // Demais dados do segurado
+        Segurado segurado = new Segurado(nome, "", "", "", "", "", "", "");
+
+        System.out.print("Informe o valor da apólice: ");
+        double valor = scanner.nextDouble();
+        scanner.nextLine(); // Consome a nova linha
+
+        System.out.print("Seguro está ativo (true/false): ");
+        boolean ativo = scanner.nextBoolean();
+        scanner.nextLine(); // Consome a nova linha
+
+        LocalDate dtAtivacao = LocalDate.now();
+        LocalDate dtFim = dtAtivacao.plusYears(1);
+
+        Seguro seguro;
+        if (tipo.equalsIgnoreCase("vida")) {
+            System.out.print("Cobre doença (true/false): ");
+            boolean cobreDoenca = scanner.nextBoolean();
+            System.out.print("Cobre acidente (true/false): ");
+            boolean cobreAcidente = scanner.nextBoolean();
+            seguro = new SeguroVida(apolice, segurado, valor, ativo, dtAtivacao, dtFim, cobreDoenca, cobreAcidente);
+        } else if (tipo.equalsIgnoreCase("veiculo")) {
+            System.out.print("Valor da franquia: ");
+            double vlrFranquia = scanner.nextDouble();
+            System.out.print("Tem carro reserva (true/false): ");
+            boolean temCarroReserva = scanner.nextBoolean();
+            System.out.print("Cobre vidros (true/false): ");
+            boolean cobreVidros = scanner.nextBoolean();
+            seguro = new SeguroVeiculo(apolice, segurado, valor, ativo, dtAtivacao, dtFim, vlrFranquia, temCarroReserva, cobreVidros);
         } else {
-            System.out.print("Digite o modelo do veículo: ");
-            String modeloVeiculo = scanner.next();
-            System.out.print("Digite o ano do veículo: ");
-            int anoVeiculo = scanner.nextInt();
-            return new SeguroVeiculo(numeroApolice, titular, valorSegurado, modeloVeiculo, anoVeiculo);
+            System.out.println("Tipo de seguro inválido.");
+            return;
         }
+
+        controller.incluirSeguro(seguro);
     }
 
-    public String solicitarNumeroApolice() {
-        System.out.print("Digite o número da apólice: ");
-        return scanner.next();
-    }
-
-    public void exibirSeguro(Seguro seguro) {
+    private void localizarSeguro() {
+        System.out.print("Informe o número da apólice: ");
+        String apolice = scanner.nextLine();
+        Seguro seguro = controller.localizarSeguro(apolice);
         if (seguro != null) {
-            System.out.println(seguro);
+            System.out.println("Seguro encontrado: " + seguro.getDados());
         } else {
             System.out.println("Seguro não encontrado.");
         }
     }
 
-    public void confirmarExclusao() {
-        System.out.print("Tem certeza que deseja excluir todos os seguros? (s/n): ");
+    private void excluirSeguro() {
+        System.out.print("Informe o número da apólice: ");
+        String apolice = scanner.nextLine();
+        controller.excluirSeguro(apolice);
     }
 
-    public void exibirMensagem(String mensagem) {
-        System.out.println(mensagem);
+    private void excluirTodosSeguros() {
+        System.out.print("Tem certeza que deseja excluir todos os seguros? (true/false): ");
+        boolean confirmacao = scanner.nextBoolean();
+        if (confirmacao) {
+            controller.excluirTodosSeguros();
+        } else {
+            System.out.println("Operação cancelada.");
+        }
+    }
+
+    private void listarTodosSeguros() {
+        controller.listarTodosSeguros();
+    }
+
+    private void verQuantidadeSeguros() {
+        int quantidade = controller.quantidadeSeguros();
+        System.out.println("Quantidade de seguros: " + quantidade);
     }
 }

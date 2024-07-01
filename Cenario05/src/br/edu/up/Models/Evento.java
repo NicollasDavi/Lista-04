@@ -1,70 +1,76 @@
-public class Evento {
-    private String nome;
-    private Date data;
-    private String local;
-    private int lotacaoMaxima;
-    private int ingressosVendidos;
-    private double precoIngresso;
+package br.edu.up.models;
 
-    public Evento(String nome, Date data, String local, int lotacaoMaxima, double precoIngresso) {
+
+public class Evento {
+
+    private String nome;
+    private String data;
+    private String local;
+    private int lotacaoMax;
+    private int ingressosDisponiveis;
+    private Double precoIngresso;
+
+    public Evento(String nome, String data, String local, int lotacaoMax, Double precoIngresso) {
         this.nome = nome;
         this.data = data;
         this.local = local;
-        this.lotacaoMaxima = lotacaoMaxima;
+        this.lotacaoMax = lotacaoMax;
         this.precoIngresso = precoIngresso;
+        this.ingressosDisponiveis = lotacaoMax;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Date getData() {
+    public String getData() {
         return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
     }
 
     public String getLocal() {
         return local;
     }
 
+    public int getLotacaoMax() {
+        return lotacaoMax;
+    }
+    
+
+    
+
+    public Double getPrecoIngresso() {
+        return precoIngresso;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
     public void setLocal(String local) {
         this.local = local;
     }
 
-    public int getLotacaoMaxima() {
-        return lotacaoMaxima;
+    public void setLotacaoMax(int lotacaoMax) {
+        this.lotacaoMax = lotacaoMax;
     }
 
-    public void setLotacaoMaxima(int lotacaoMaxima) {
-        this.lotacaoMaxima = lotacaoMaxima;
-    }
-
-    public int getIngressosVendidos() {
-        return ingressosVendidos;
-    }
-
-    public void setIngressosVendidos(int ingressosVendidos) {
-        this.ingressosVendidos = ingressosVendidos;
-    }
-
-    public double getPrecoIngresso() {
-        return precoIngresso;
-    }
-
-    public void setPrecoIngresso(double precoIngresso) {
+    public void setPrecoIngresso(Double precoIngresso) {
         this.precoIngresso = precoIngresso;
     }
 
-    @Override
-    public String toString() {
-        return "Nome: " + nome + ", Data: " + data + ", Local: " + local + ", Lotação Máxima: " + lotacaoMaxima
-                + ", Ingressos Vendidos: " + ingressosVendidos + ", Preço do Ingresso: " + precoIngresso;
+    public int getIngressosDisponiveis() {
+        return ingressosDisponiveis;
     }
+
+    public void setIngressosDisponiveis(int ingressosDisponiveis) {
+        this.ingressosDisponiveis = ingressosDisponiveis;
+    }
+    
+
+    
+    
 }

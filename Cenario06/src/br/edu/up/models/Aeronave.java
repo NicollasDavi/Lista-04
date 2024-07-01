@@ -2,15 +2,15 @@ package br.edu.up.models;
 
 public class Aeronave {
 
-    public Aeronave(String codigo, String tipo, int quantidadeAssentos) {
+    private String codigo;
+    private String qtdAssentos;
+    private String tipoAeronave;
+    
+    public Aeronave(String codigo, String tipo, String qtdAssentos) {
         this.codigo = codigo;
         this.tipoAeronave = tipo;
-        this.qtdAssentos = quantidadeAssentos;
+        this.qtdAssentos = qtdAssentos;
     }
-
-    private String codigo;
-    private int qtdAssentos;
-    private String tipoAeronave;
 
     public String getCodigo() {
         return codigo;
@@ -18,10 +18,10 @@ public class Aeronave {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
-    public int getQtdAssentos() {
+    public String getQtdAssentos() {
         return qtdAssentos;
     }
-    public void setQtdAssentos(int qtdAssentos) {
+    public void setQtdAssentos(String qtdAssentos) {
         this.qtdAssentos = qtdAssentos;
     }
     public String getTipo() {
@@ -29,6 +29,11 @@ public class Aeronave {
     }
     public void setTipo(String tipo) {
         this.tipoAeronave = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Aeronave [codigo=" + codigo + ", qtdAssentos=" + qtdAssentos + ", tipoAeronave=" + tipoAeronave + "]";
     }
 
     

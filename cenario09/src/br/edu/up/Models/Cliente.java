@@ -1,31 +1,58 @@
-package br.edu.up.Models;
-
-
+package br.edu.up.models;
 
 public abstract class Cliente {
-    protected String nome;
-    protected String cpfCnpj;
-    protected double vlrEmprestado;
+  
+    private String nome;
+    private String telefone;
+    private String email;
+    private Endereco endereco;
+    private double vlrMaxCredito;
+    private double vlrEmprestado;
 
-    public Cliente(String nome, String cpfCnpj) {
+    
+    
+    public Cliente(String nome, String telefone, String email, double vlrMaxCredito) {
         this.nome = nome;
-        this.cpfCnpj = cpfCnpj;
-        this.vlrEmprestado = 0.0;
+        this.telefone = telefone;
+        this.email = email;
+        this.vlrMaxCredito = vlrMaxCredito;
     }
-
     public String getNome() {
         return nome;
     }
-
-    public String getCpfCnpj() {
-        return cpfCnpj;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
-
+    public String getTelefone() {
+        return telefone;
+    }
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public Endereco getEndereco() {
+        return endereco;
+    }
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+    public double getVlrMaxCredito() {
+        return vlrMaxCredito;
+    }
+    public void setVlrMaxCredito(double vlrMaxCredito) {
+        this.vlrMaxCredito = vlrMaxCredito;
+    }
     public double getVlrEmprestado() {
         return vlrEmprestado;
     }
+    public void setVlrEmprestado(double vlrEmprestado) {
+        this.vlrEmprestado = vlrEmprestado;
+    }
 
-    public abstract void emprestar(double valor);
-
-    public abstract void devolver(double valor);
+    
 }

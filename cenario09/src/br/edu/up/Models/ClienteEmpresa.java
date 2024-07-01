@@ -1,25 +1,49 @@
-package br.edu.up.Models;
+package br.edu.up.models;
 
 public class ClienteEmpresa extends Cliente {
-    private static final double MAX_CREDITO = 25000.0;
+    
+    private String cnpj;
+    private String inscEstadual;
+    private int anoFundacao;
 
-    public ClienteEmpresa(String nome, String cnpj) {
-        super(nome, cnpj);
+    
+    public ClienteEmpresa(String nome, String telefone, String email, double vlrMaxCredito,
+            String cnpj, String inscEstadual, int anoFundacao) {
+        super(nome, telefone, email, vlrMaxCredito);
+        this.cnpj = cnpj;
+        this.inscEstadual = inscEstadual;
+        this.anoFundacao = anoFundacao;
     }
-
+    public String getCnpj() {
+        return cnpj;
+    }
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+    public String getInscEstadual() {
+        return inscEstadual;
+    }
+    public void setInscEstadual(String inscEstadual) {
+        this.inscEstadual = inscEstadual;
+    }
+    public int getAnoFundacao() {
+        return anoFundacao;
+    }
+    public void setAnoFundacao(int anoFundacao) {
+        this.anoFundacao = anoFundacao;
+    }
     @Override
-    public void emprestar(double valor) {
-        if (vlrEmprestado + valor <= MAX_CREDITO) {
-            vlrEmprestado += valor;
-            System.out.println("Empréstimo de R$" + valor + " realizado para o cliente empresa " + nome);
-        } else {
-            System.out.println("Empréstimo excede o limite de crédito para o cliente empresa " + nome);
-        }
+    public String toString() {
+        return "\nClienteEmpresa [ Nome: "+ super.getNome()
+                +", Telefone: "+ super.getTelefone()
+                +", Email: "+ super.getEmail()
+                +", CNPJ: "+ getCnpj()
+                +", Inscrição estadual: "+ getInscEstadual()
+                +", Ano da fundação da empresa: "+ getAnoFundacao()
+                +", Valor máximo de crédito: "+ getVlrMaxCredito()
+                +", Valor emprestado: "+ getVlrEmprestado()+" ]";
     }
 
-    @Override
-    public void devolver(double valor) {
-        vlrEmprestado -= valor;
-        System.out.println("Devolução de R$" + valor + " realizada para o cliente empresa " + nome);
-    }
+    
+
 }

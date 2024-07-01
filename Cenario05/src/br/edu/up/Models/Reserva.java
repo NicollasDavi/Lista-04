@@ -1,49 +1,77 @@
-import java.util.Date;
+package br.edu.up.models;
+import javax.xml.crypto.Data;
 
 public class Reserva {
-    private String responsavel;
-    private int quantidadePessoas;
-    private Date dataReserva;
-    private double valorTotal;
 
-    public Reserva(String responsavel, int quantidadePessoas, double valorTotal) {
-        this.responsavel = responsavel;
-        this.quantidadePessoas = quantidadePessoas;
-        this.valorTotal = valorTotal;
-        this.dataReserva = new Date();
-    }
+   Evento eventos;
+   private String nome;
+   private String nomeEvento;
+   private int quantidadePessoas;
+   private String dataReserva;
+   private Double valorTotal;
+   private double valorIngressoEvento;
+   
 
-    public String getResponsavel() {
-        return responsavel;
-    }
+   
 
-    public void setResponsavel(String responsavel) {
-        this.responsavel = responsavel;
-    }
+   public Reserva(String nome, int quantidadePessoas, String dataReserva, String nomeEvento, double valor) {
+      this.nome = nome;
+      this.quantidadePessoas = quantidadePessoas;
+      this.dataReserva = dataReserva;
+      this.nomeEvento = nomeEvento;
+      this.valorIngressoEvento = valor;
+   }
+   
 
-    public int getQuantidadePessoas() {
-        return quantidadePessoas;
-    }
+   public double getValorIngressoEvento() {
+      return valorIngressoEvento;
+   }
 
-    public void setQuantidadePessoas(int quantidadePessoas) {
-        this.quantidadePessoas = quantidadePessoas;
-    }
 
-    public Date getDataReserva() {
-        return dataReserva;
-    }
+   public String getNomeEvento() {
+      return nomeEvento;
+   }
 
-    public double getValorTotal() {
-        return valorTotal;
-    }
+   public void setNomeEvento(String nomeEvento) {
+      this.nomeEvento = nomeEvento;
+   }
 
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
+   public String getNome() {
+      return nome;
+   }
 
-    @Override
-    public String toString() {
-        return "Responsável: " + responsavel + ", Quantidade de Pessoas: " + quantidadePessoas + ", Data da Reserva: "
-                + dataReserva + ", Valor Total: " + valorTotal;
-    }
+   public void setNome(String nome) {
+      this.nome = nome;
+   }
+
+   public int getQuantidadePessoas() {
+      return quantidadePessoas;
+   }
+
+   public void setQuantidadePessoas(int quantidadePessoas) {
+      this.quantidadePessoas = quantidadePessoas;
+   }
+
+   public String getDataReserva() {
+      return dataReserva;
+   }
+
+   public void setDataReserva(String dataReserva) {
+      this.dataReserva = dataReserva;
+   }
+
+   public Double getValorTotal() {
+      return valorTotal;
+   }
+
+   public void setValorTotal(Double valorTotal) {
+      this.valorTotal = valorTotal;
+   }
+
+
+   
+
+   
+
+
 }
